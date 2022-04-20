@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    TODO list
+    <a class="btn btn-primary float-right" href="{% url 'doit:task-create' %}" role="button">
+      Add task
+    </a>
+  </h1>
+
+  <br>
+
+  {% if task_list %}
+    <ul class="todo-list">
+      {% for task in task_list %}
+        <li>
+          <strong>{{ task.content }}</strong>
+
+          {% if task.done %}
+            <strong style="color: green">Done</strong>
+          {% else %}
+            <strong style="color: red">Not done</strong>
+          {% endif %}
+
+          <br>
+
+          Created: {{ task.created_time }}
+          {% if task.deadline %}
+            <span style="color: orangered">Deadline: {{ task.deadline }}</span>
+          {% endif %}
+
+          <br>
+
+          <span class="text-muted">
+            Tags: {% for tag in task.tags.all %} {{ tag.name }} {% endfor %}
+          </span>
+          <a href="{% url 'doit:task-update' pk=task.id %}">Update</a>
+          <a href="{% url 'doit:task-delete' pk=task.id %}">Delete</a>
+
+          <hr>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no tasks in list</p>
+  {% endif %}
+
+{% endblock %}

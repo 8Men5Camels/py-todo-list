@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Delete Task</h1>
+
+  <p>Are you sure you want to remove the task: <b>"{{ task.content }}"</b> ?</p>
+
+  <form action="" method="post" novalidate>
+    {% csrf_token %}
+    <input class="btn btn-danger" type="submit" value="Yes, delete">
+  </form>
+
+{% endblock %}
