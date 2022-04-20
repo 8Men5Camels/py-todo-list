@@ -1,5 +1,4 @@
 from django.db import models
-from django.views import generic
 
 
 class Tag(models.Model):
@@ -23,4 +22,5 @@ class Task(models.Model):
         ordering = ["created_time"]
 
     def __str__(self):
-        return f"{self.content}: {self.created_time} - {self.deadline} - {self.done}"
+        return f"{self.content}: {self.created_time} " \
+               f"- {self.deadline} - {self.done}"
